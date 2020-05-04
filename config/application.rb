@@ -31,5 +31,12 @@ module SbAdmin
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Don't generate div's with field_with_errors class
+    config.action_view.field_error_proc = Proc.new { |html_tag, instance| 
+      html_tag
+    }
+
+    config.i18n.default_locale = :"pt-BR"
   end
 end
