@@ -56,3 +56,11 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "chartkick"
 
 gem "devise"
+
+gem "image_processing", "~> 1.0"
+
+gem 'kaminari'
+
+gem 'pg_search'
+
+gem "validators"
