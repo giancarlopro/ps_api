@@ -1,0 +1,66 @@
+<% content_for :page_title do %>Detalhes da Empresa<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to '<i class="fa fa-angle-left"></i> Voltar'.html_safe, admin_companies_path %>
+<% end %>
+
+<div class="card shadow mb-4">
+  <div class="card-header"><b>Formulário de cadastro</b></div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="list-group list-group-flush text-center">
+        <a href="#" class="list-group-item text-red list-group-item-action">Informações da Empresa</a>
+        <a href="#" class="list-group-item list-group-item-action">Usuários</a>
+      </ul>
+    </div>
+
+    <div class="col-md-8 container">
+      <div class="card-body">
+        <div class="row mb-2 d-flex justify-content-between">
+          <b>Detalhes</b>
+          <%= link_to '<i class="fa fa-edit"></i> Editar'.html_safe, edit_admin_company_path(@company), class: 'btn btn-light btn-sm' %>
+        </div>
+        <div class="form-group">
+          <%= label_tag :company_name, 'Razão Social' %>
+          <%= text_field_tag :company_name, @company.company_name, class: 'form-control', disabled: true %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :fantasy_name, 'Nome Fantasia' %>
+          <%= text_field_tag :fantasy_name, @company.fantasy_name, class: 'form-control', disabled: true %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :email, 'Email' %>
+          <%= text_field_tag :email, @company.email, class: 'form-control', disabled: true %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :status, 'Status' %>
+          <%= text_field_tag :status, @company.status, class: 'form-control', disabled: true %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :category_ids, 'Categorias' %>
+          <%= select_tag :category_ids, options_from_collection_for_select(@categories, 'id', 'name', @company.category_ids), {class: "form-control multi-select", multiple: true, disabled: true} %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :logo, 'Logo' %>
+          <div class="row">
+            <div class="col-md-2 d-flex justify-content-end">
+              <div class="img-preview-container">
+                <% if @company.logo.attached? %>
+                  <%= image_tag @company.logo.variant(resize_to_limit: [60, 60]), id: 'preview', class: 'img-preview' %>
+                <% else %>
+                  <img id="preview" class="img-preview" height="60" width="60" />
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

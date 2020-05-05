@@ -1,0 +1,85 @@
+<%= form_with(model: [:admin, company], local: true, html: {multipart: true}) do |form| %>
+  <div class="form-group">
+    <%= form.label :company_name, 'Razão Social' %>
+    <%= form.text_field :company_name, class: "form-control #{if company.errors[:company_name].any? then 'is-invalid' end}" %>
+
+    <% if company.errors[:company_name].any? %>
+      <div class="invalid-feedback">
+        <%= company.errors[:company_name].join(', ') %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :fantasy_name, 'Nome Fantasia' %>
+    <%= form.text_field :fantasy_name, class: "form-control #{if company.errors[:fantasy_name].any? then 'is-invalid' end}" %>
+
+    <% if company.errors[:fantasy_name].any? %>
+      <div class="invalid-feedback">
+        <%= company.errors[:fantasy_name].join(', ') %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :email, 'Email' %>
+    <%= form.text_field :email, class: "form-control #{if company.errors[:email].any? then 'is-invalid' end}" %>
+
+    <% if company.errors[:email].any? %>
+      <div class="invalid-feedback">
+        <%= company.errors[:email].join(', ') %>
+      </div>
+    <% end %>
+  </div>
+
+  <% if company.persisted? %>
+    <div class="form-group">
+      <%= form.label :status, 'Status' %>
+      <%= form.select :status, options_for_select(Company::STATUS_OPTIONS, company.status), {}, {class: "form-control #{if company.errors[:status].any? then 'is-invalid' end}"} %>
+
+      <% if company.errors[:status].any? %>
+        <div class="invalid-feedback">
+          <%= company.errors[:status].join(', ') %>
+        </div>
+      <% end %>
+    </div>
+  <% end %>
+
+  <div class="form-group">
+    <%= form.label :category_ids, 'Categorias' %>
+    <%= form.select :category_ids, options_from_collection_for_select(@categories, 'id', 'name', company.category_ids), {}, {class: "form-control multi-select #{if company.errors[:category_ids].any? then 'is-invalid' end}", multiple: true} %>
+
+    <% if company.errors[:category_ids].any? %>
+      <div class="invalid-feedback">
+        <%= company.errors[:category_ids].join(', ') %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :logo, 'Logo' %>
+
+    <div class="row d-flex align-items-end">
+      <div class="col-md-10">
+        <div class="custom-file">
+          <%= form.file_field :logo, class: 'custom-file-input', onchange: 'window.preview(this);' %>
+          <%= form.label :logo, 'Abrir', class: 'custom-file-label' %>
+        </div>
+      </div>
+
+      <div class="col-md-2 d-flex justify-content-end">
+        <div class="img-preview-container">
+          <% if company.logo.attached? %>
+            <%= image_tag company.logo.variant(resize_to_limit: [40, 40]), id: 'preview', class: 'img-preview' %>
+          <% else %>
+            <img id="preview" class="img-preview" height="40" width="40" />
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-group d-flex justify-content-end">
+    <%= form.submit company.persisted? ? 'Atualizar Empresa': 'Criar Empresa', class: 'btn btn-red' %>
+  </div>
+<% end %>
