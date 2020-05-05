@@ -24,6 +24,31 @@ require('./shared/demo/chart-area-demo')
 require('./shared/demo/chart-bar-demo')
 require('./shared/demo/chart-pie-demo')
 
+require('select2')
+
+function preview(input) {
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      $('#preview')
+        .attr('src', e.target.result)
+        .width(40)
+        .height(40);
+    };
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
+
+window.preview = preview
+
+$(document).on('ready turbolinks:load', function () {
+  $('.multi-select').select2({
+    theme: "bootstrap",
+    multiple: true
+  })
+});
 
 // Uncomment to copy all static images under ../images to the output folder and reference
 // them with the image_pack_tag helper in views (e.g <%= image_pack_tag 'rails.png' %>)
