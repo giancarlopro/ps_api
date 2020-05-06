@@ -5,6 +5,8 @@ Rails.application.routes.draw do
     resources :companies do
       resources :company_users
     end
+
+    resources :categories
   end
 
   devise_for :company_users, path: 'company'
