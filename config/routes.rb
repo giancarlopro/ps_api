@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
   devise_for :admin_users, path: 'admin'
 
-  resource :admin do
-    resources :companies do
-      resources :company_users
+  authenticate :admin_user do
+    resource :admin do
+      resources :companies do
+        resources :company_users
+      end
+  
+      resources :categories
     end
-
-    resources :categories
   end
 
   devise_for :company_users, path: 'company'

@@ -41,5 +41,9 @@ module SbAdmin
 
     config.assets.paths << Rails.root.join('vendor', 'assets', 'fonts')
     config.assets.precompile << /\.(?:svg|eot|woff|ttf)$/
+
+    config.to_prepare do
+      Devise::SessionsController.layout "auth"
+    end
   end
 end
