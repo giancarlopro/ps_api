@@ -7,6 +7,7 @@ class Company < ApplicationRecord
                   }
 
   has_one_attached :logo
+  has_many :company_users
 
   STATUS_OPTIONS = [['Ativa', 'ativa'], ['Inativa', 'inativa']]
 
