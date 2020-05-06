@@ -1,0 +1,46 @@
+<% content_for :page_title do %>Detalhes da Empresa<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to '<i class="fa fa-angle-left"></i> Voltar'.html_safe, admin_company_path(@company) %>
+<% end %>
+
+<div class="card shadow mb-4">
+  <div class="card-header"><b>Formulário de cadastro</b></div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="list-group list-group-flush text-center">
+        <%= link_to 'Informações da Empresa', admin_company_path(@company), class: 'list-group-item list-group-item-action' %>
+        <%= link_to 'Usuários', admin_company_company_users_path(@company), class: 'text-red list-group-item list-group-item-action' %>
+      </ul>
+    </div>
+
+    <div class="col-md-8 container">
+      <div class="card-body">
+        <div class="mb-2 d-flex justify-content-between">
+          <b>Detalhes</b>
+          <div class="d-flex">
+            <%= link_to '<i class="fa fa-edit"></i> Editar'.html_safe, edit_admin_company_company_user_path(@company, @company_user), class: 'mr-2 btn btn-light btn-sm' %>
+            <%= link_to '<i class="fa fa-angle-left"></i> Voltar'.html_safe, admin_company_company_users_path(@company), class: 'btn btn-light btn-sm' %>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :name, 'Nome' %>
+          <%= text_field_tag :name, @company_user.name, class: 'form-control', disabled: true %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :email, 'Email' %>
+          <%= text_field_tag :email, @company_user.email, class: 'form-control', disabled: true %>
+        </div>
+
+        <div class="form-group">
+          <%= label_tag :permission, 'Permissão' %>
+          <%= select_tag :permission, options_for_select(CompanyUser::PERMISSION_OPTIONS, @company_user.permission), class: 'form-control', disabled: true %>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>

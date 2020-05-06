@@ -1,0 +1,62 @@
+<%= form_with(model: [:admin, company, company_user], local: true) do |form| %>
+  <%= form.hidden_field :company_id, value: company.id %>
+
+  <div class="form-group">
+    <%= form.label :name, 'Nome' %>
+    <%= form.text_field :name, class: "form-control #{if company_user.errors[:name].any? then 'is-invalid' end}" %>
+
+    <% if company_user.errors[:name].any? %>
+      <div class="invalid-feedback">
+        <%= company_user.errors[:name].join(', ') %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="form-group">
+    <%= form.label :email, 'Email' %>
+    <%= form.text_field :email, class: "form-control #{if company_user.errors[:email].any? then 'is-invalid' end}" %>
+
+    <% if company_user.errors[:email].any? %>
+      <div class="invalid-feedback">
+        <%= company_user.errors[:email].join(', ') %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="row">
+    <div class="col">
+      <div class="form-group">
+        <%= form.label :password, 'Senha' %>
+        <%= form.password_field :password, class: "form-control #{if company_user.errors[:password].any? then 'is-invalid' end}" %>
+
+        <% if company_user.errors[:password].any? %>
+          <div class="invalid-feedback">
+            <%= company_user.errors[:password].join(', ') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <div class="col">
+      <div class="form-group">
+        <%= form.label :permission, 'Permissão' %>
+        <%= form.select :permission, options_for_select(CompanyUser::PERMISSION_OPTIONS, company_user.permission), {include_blank: true}, { class: "form-control #{if company_user.errors[:permission].any? then 'is-invalid' end}" } %>
+
+        <% if company_user.errors[:permission].any? %>
+          <div class="invalid-feedback">
+            <%= company_user.errors[:permission].join(', ') %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="custom-control custom-checkbox">
+    <%= form.check_box :request_change_password, checked: new_record?(company_user), class: 'custom-control-input' %>
+    <%= form.label :request_change_password, '<b>Solicitar alteração de senha no próximo acesso?</b>'.html_safe, class: 'custom-control-label' %>
+  </div>
+
+  <div class="form-group d-flex justify-content-end">
+    <%= form.submit company_user.persisted? ? 'Atualizar Usuário': 'Criar Usuário', class: 'btn btn-red' %>
+  </div>
+<% end %>

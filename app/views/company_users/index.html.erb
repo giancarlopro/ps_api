@@ -1,0 +1,56 @@
+<% content_for :page_title do %>Detalhes da Empresa<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to '<i class="fa fa-angle-left"></i> Voltar'.html_safe, admin_company_path(@company) %>
+<% end %>
+
+<div class="card shadow mb-4">
+  <div class="card-header"><b>Formulário de cadastro</b></div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="list-group list-group-flush text-center">
+        <%= link_to 'Informações da Empresa', admin_company_path(@company), class: 'list-group-item list-group-item-action' %>
+        <%= link_to 'Usuários', admin_company_company_users_path(@company), class: 'text-red list-group-item list-group-item-action' %>
+      </ul>
+    </div>
+
+    <div class="col-md-8 container">
+      <div class="card-body">
+        <div class="mb-2 d-flex justify-content-between">
+          <b>Listagem</b>
+          <%= link_to 'Cadastrar Novo'.html_safe, new_admin_company_company_user_url(@company), class: 'btn btn-red btn-sm' %>
+        </div>
+
+        <table class="table table- table-hover table-sm">
+          <thead>
+            <tr>
+              <th>Nome</th>
+              <th>Email</th>
+              <th>Permissão</th>
+              <th>Ações</th>
+            </tr>
+          </thead>
+
+          <tbody>
+            <% @company_users.each do |company_user| %>
+              <tr>
+                <td><%= company_user.name %></td>
+                <td><%= company_user.email %></td>
+                <td><%= company_user.permission %></td>
+                <td>
+                  <div class="btn-group">
+                    <%= link_to '<i class="fas fa-eye"></i>'.html_safe, admin_company_company_user_path(@company, company_user), class: 'btn btn-light btn-sm' %>
+                    <%= link_to '<i class="fas fa-edit"></i>'.html_safe, edit_admin_company_company_user_path(@company, company_user), class: 'btn btn-light btn-sm' %>
+                    <%= link_to '<i class="fas fa-trash-alt"></i>'.html_safe, admin_company_company_user_path(@company, company_user), method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-light btn-sm' %>
+                  </div>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+</div>

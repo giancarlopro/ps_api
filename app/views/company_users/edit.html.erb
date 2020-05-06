@@ -1,0 +1,30 @@
+<% content_for :page_title do %>Detalhes da Empresa<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to '<i class="fa fa-angle-left"></i> Voltar'.html_safe, admin_company_company_users_path %>
+<% end %>
+
+<div class="card shadow mb-4">
+  <div class="card-header"><b>Formulário de cadastro</b></div>
+
+  <div class="row">
+    <div class="col-md-4">
+      <ul class="list-group list-group-flush text-center">
+        <a href="#" class="list-group-item list-group-item-action">Informações da Empresa</a>
+        <a href="#" class="list-group-item text-red list-group-item-action">Usuários</a>
+      </ul>
+    </div>
+
+    <div class="col-md-8 container">
+      <div class="card-body">
+        <div class="mb-2 d-flex justify-content-between">
+          <b>Listagem</b>
+          <%= link_to '<i class="fa fa-angle-left"></i> Cancelar'.html_safe, admin_company_company_user_path(@company, @company_user), class: 'btn btn-light btn-sm' %>
+        </div>
+
+        <%= render 'form', company: @company, company_user: @company_user %>
+
+      </div>
+    </div>
+  </div>
+</div>

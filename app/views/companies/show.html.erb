@@ -10,8 +10,8 @@
   <div class="row">
     <div class="col-md-4">
       <ul class="list-group list-group-flush text-center">
-        <a href="#" class="list-group-item text-red list-group-item-action">Informações da Empresa</a>
-        <a href="#" class="list-group-item list-group-item-action">Usuários</a>
+        <%= link_to 'Informações da Empresa', admin_company_path(@company), class: 'text-red list-group-item list-group-item-action' %>
+        <%= link_to 'Usuários', admin_company_company_users_path(@company), class: 'list-group-item list-group-item-action' %>
       </ul>
     </div>
 
