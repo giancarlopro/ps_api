@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   devise_for :admin_users, path: 'admin'
 
   authenticate :admin_user do
@@ -14,7 +15,10 @@ Rails.application.routes.draw do
   end
 
   devise_for :company_users, path: 'company'
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+
+  namespace :api do
+    resources :categories, only: [:index, :show]
+  end
 
   root 'examples#index'
 
