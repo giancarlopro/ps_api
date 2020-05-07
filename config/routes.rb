@@ -18,6 +18,7 @@ Rails.application.routes.draw do
 
   namespace :api do
     resources :categories, only: [:index, :show]
+    resources :companies, only: [:index, :show]
   end
 
   root 'examples#index'
