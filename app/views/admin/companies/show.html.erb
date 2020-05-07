@@ -9,10 +9,7 @@
 
   <div class="row">
     <div class="col-md-4">
-      <ul class="list-group list-group-flush text-center">
-        <%= link_to 'Informações da Empresa', admin_company_path(@company), class: 'text-red list-group-item list-group-item-action' %>
-        <%= link_to 'Usuários', admin_company_company_users_path(@company), class: 'list-group-item list-group-item-action' %>
-      </ul>
+      <%= render 'admin/side_menu', company: @company %>
     </div>
 
     <div class="col-md-8 container">

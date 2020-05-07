@@ -2,7 +2,9 @@ Rails.application.routes.draw do
   devise_for :admin_users, path: 'admin'
 
   authenticate :admin_user do
-    resource :admin do
+    namespace :admin do
+      get '/', to: '/admin/admin#index'
+
       resources :companies do
         resources :company_users
       end
