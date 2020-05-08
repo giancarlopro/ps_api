@@ -76,3 +76,14 @@ $fa-font-path: '@fortawesome/fontawesome-free/webfonts';
     font-size: 4em;
     color: #f1533f;
 }
+
+.sidebar-logo {
+    font-family: 'AltairHeavy';
+    font-size: 2em;
+    color: #fff;
+}
+
+.sidebar-logo:hover {
+    text-decoration: none !important;
+    color: #fff;
+}
