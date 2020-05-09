@@ -15,10 +15,15 @@ Rails.application.routes.draw do
   end
 
   devise_for :company_users, path: 'company'
+  
+  as :company_user do
+    get '/company/users/edit' => 'devise/registrations#edit', :as => 'edit_company_user_registration'    
+    put '/company/users' => 'devise/registrations#update', :as => 'company_user_registration'
+  end
 
   authenticate :company_user do
     namespace :company do
-      get '/', to: 'company/company#index'
+      get '/', to: '/company/company#index'
     end
   end
 
