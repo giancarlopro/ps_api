@@ -1,0 +1,56 @@
+<% content_for :page_title do %>Alterar Senha<% end %>
+
+<% content_for :page_actions do %>
+  <%= link_to '<i class="fa fa-angle-left"></i> Cancelar'.html_safe, root_path, class: 'btn btn-light' %>
+<% end %>
+
+<div class="card shadow mb-4">
+  <div class="card-header"><b>Formulário de alteração de senha</b></div>
+
+  <div class="container row mt-3 pb-3">
+    <div class="col-md-4">
+      <b>Informações de acesso</b>
+    </div>
+
+    <div class="col-md-8 container">
+      <%= form_for(@user, url: { action: 'update_password' }) do |f| %>
+        <div class="form-group">
+          <%= f.label :current_password, 'Senha Atual' %>
+          <%= f.password_field :current_password, autocomplete: "current-password", class: "form-control #{'is-invalid' if @user.errors[:current_password].any?}" %>
+          <% if @user.errors[:current_password].any? %>
+            <div class="invalid-feedback">
+              <%= @user.errors[:current_password].join(', ') %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password, 'Nova Senha' %>
+          <%= f.password_field :password, autocomplete: "new-password", class: "form-control #{'is-invalid' if @user.errors[:password].any?}" %>
+
+          <% if @user.errors[:password].any? %>
+            <div class="invalid-feedback">
+              <%= @user.errors[:password].join(', ') %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :password_confirmation, 'Nova Senha' %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "form-control #{'is-invalid' if @user.errors[:password_confirmation].any?}" %>
+
+          <% if @user.errors[:password_confirmation].any? %>
+            <div class="invalid-feedback">
+              <%= @user.errors[:password_confirmation].join(', ') %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="form-group d-flex justify-content-end">
+          <%= f.submit 'Atualizar Usuário', class: 'btn btn-red' %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
