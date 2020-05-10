@@ -1,24 +1,26 @@
-<li class="nav-item dropdown no-arrow">
-  <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-    <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
-  </a>
-  <!-- Dropdown - User Information -->
-  <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-    <% if current_company_user %>
-      <a class="dropdown-item" href="<%= edit_company_users_path %>">
-        <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
-        Alterar Senha
-      </a>
-      <div class="dropdown-divider"></div>
-    <% end %>
+<% if @current_user %>
+  <li class="nav-item dropdown no-arrow">
+    <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      <span class="mr-2 d-none d-lg-inline text-gray-600 small"><%= @current_user.name %></span>
+      <img class="img-profile rounded-circle" src="https://via.placeholder.com/60">
+    </a>
+    <!-- Dropdown - User Information -->
+    <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
+      <% if current_company_user %>
+        <a class="dropdown-item" href="<%= edit_company_users_path %>">
+          <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+          Alterar Senha
+        </a>
+        <div class="dropdown-divider"></div>
+      <% end %>
 
-    <% if current_admin_user || current_company_user %>
-      <%= link_to '<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout'.html_safe,
-        destroy_session_path(current_admin_user || current_company_user),
-        method: :delete,
-        class: 'dropdown-item'
-      %>
-    <% end %>
-  </div>
-</li>
+      <% if current_admin_user || current_company_user %>
+        <%= link_to '<i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout'.html_safe,
+          destroy_session_path(current_admin_user || current_company_user),
+          method: :delete,
+          class: 'dropdown-item'
+        %>
+      <% end %>
+    </div>
+  </li>
+<% end %>
