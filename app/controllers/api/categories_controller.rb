@@ -6,12 +6,12 @@ class Api::CategoriesController < ApplicationController
       @categories = Category.all
     end
 
-    render json: @categories
+    render 'api/categories/index.json'
   end
 
   def show
     @category = Category.find(params[:id])
 
-    render json: @category
+    render 'api/categories/show.json'
   end
 end

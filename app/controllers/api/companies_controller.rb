@@ -6,12 +6,12 @@ class Api::CompaniesController < ApplicationController
       @companies = Company.all
     end
 
-    render json: @companies
+    render 'api/companies/index.json'
   end
 
   def show
     @company = Company.find(params[:id])
 
-    render json: @company
+    render 'api/companies/show.json'
   end
 end
